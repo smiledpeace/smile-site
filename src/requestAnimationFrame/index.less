@@ -1,0 +1,55 @@
+.smile-frame__item {
+    // width: 20px;
+    height: 20px;
+    // transition: all .3s linear;
+    background-color: orange;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+}
+
+.smile-frame {
+    &__animate {
+        width: 36px;
+        height: 36px;
+        background-color: silver;
+        color: floralwhite;
+        text-align: center;
+        line-height: 36px;
+        font-size: 12px;
+    }
+
+    &__slide {
+        position: relative;
+        --percent: 5;
+        padding: 5px 0;
+    }
+
+    &__button {
+        width: 100%;
+        height: 6px;
+        background-color: silver;
+
+        &:after {
+            content: '';
+            display: block;
+            width: calc(1% * var(--percent));
+            background: skyblue;
+            height: 100%;
+        }
+    }
+
+    &__thumb {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 0;
+        padding: 0;
+        background: #fff;
+        box-shadow: 0 0 0 1px skyblue;
+        border-radius: 50%;
+        left: calc(1% * var(--percent));
+        top: 0;
+        margin: auto -8px;
+    }
+}

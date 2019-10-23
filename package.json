@@ -1,0 +1,42 @@
+{
+    "name": "smile",
+    "version": "1.0.0",
+    "description": "TS Learning",
+    "repository": {},
+    "keywords": [
+        "vue",
+        "component"
+    ],
+    "scripts": {
+        "dev": "webpack --config build/webpack.dev.conf.js",
+        "site": "webpack-dev-server --inline false --progress --config build/webpack.site.dev.js",
+        "build-site": "webpack --config build/webpack.site.dev.js"
+    },
+    "author": "smiledpeace",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/plugin-transform-object-assign": "^7.2.0",
+        "@babel/plugin-transform-runtime": "^7.6.2",
+        "@babel/preset-env": "^7.6.3",
+        "@babel/preset-typescript": "^7.6.0",
+        "@babel/runtime": "^7.6.3",
+        "@vue/babel-preset-jsx": "^1.1.1",
+        "autoprefixer": "^9.6.5",
+        "babel-loader": "^8.0.6",
+        "css-loader": "^3.2.0",
+        "less": "^3.10.3",
+        "less-loader": "^5.0.0",
+        "postcss-loader": "^3.0.0",
+        "style-loader": "^1.0.0",
+        "vue": "^2.6.10",
+        "vue-loader": "^15.7.1",
+        "vue-router": "^3.1.3",
+        "vue-template-compiler": "^2.6.10",
+        "web-webpack-plugin": "^4.6.6",
+        "webpack": "^4.41.1",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.8.2",
+        "webpack-merge": "^4.2.2"
+    }
+}
