@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import App from './App'
 // import './js/game';
-import './js/robot';
+// import './js/robot';
+import './js/removeSubFolders';
 import '../src/index.less'
 new Vue({
     el: '#app',
