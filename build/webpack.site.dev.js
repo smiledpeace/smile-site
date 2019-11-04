@@ -5,6 +5,7 @@ const config = require('./webpack.base');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = merge(config, {
     entry: {
         app: "./doc/main.js"
@@ -25,7 +26,7 @@ module.exports = merge(config, {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../doc/views/index.dev.html'), // HTML 模版文件所在的文件路径
             title: 'index.html'
-        })
+        }),
     ],
     optimization: {
         runtimeChunk: 'single',
@@ -37,7 +38,12 @@ module.exports = merge(config, {
                     chunks: 'all'
                 }
             }
-        }
+        },
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+            })
+        ],
     },
     watch: true
 })
