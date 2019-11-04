@@ -17,6 +17,7 @@ module.exports = merge(config, {
     output: {
         path: path.join(__dirname, '../doc/dist'),
         filename: '[name].[contenthash].js',
+        chunkFilename: "[name].[contenthash].js",
         publicPath: '/',
     },
     plugins: [
