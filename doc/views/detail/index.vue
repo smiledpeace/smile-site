@@ -1,6 +1,6 @@
 <template>
     <div>
-        detail
+        detail + like + someone + 撒啊发 
     </div>
 </template>
 <script>
@@ -8,3 +8,7 @@
         
     }
 </script>
+<style lang="less">
+    div {
+    }
+</style>

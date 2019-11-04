@@ -42,8 +42,12 @@ module.exports = merge(config, {
         minimizer: [
             new UglifyJsPlugin({
                 cache: true,
+                parallel: true,
+                sourceMap: true // set to true if you want JS source maps
             })
         ],
     },
+    // webpack4.x 配置压缩
+    // mode: "production",
     watch: true
 })

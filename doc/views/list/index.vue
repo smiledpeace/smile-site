@@ -1,6 +1,12 @@
 <template>
   <div class="demo">
-    1111111
+    1111111 + 啊打发
+
+    <div>
+        <pre>
+            <code></code>
+        </pre>
+    </div>
   </div>
 </template>
 <script>
