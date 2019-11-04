@@ -1,6 +1,6 @@
 <template>
     <div>
-        detail + like + someone + 撒啊发 
+        gadfly
     </div>
 </template>
 <script>
@@ -10,5 +10,7 @@
 </script>
 <style lang="less">
     div {
+        background: green;
+        color: #fff
     }
 </style>
