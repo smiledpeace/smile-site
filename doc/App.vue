@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="demo">
     1111111
     <!-- <smile-swipe class="demo" :autoplay="3000">
         <smile-swipe-item>1</smile-swipe-item>
@@ -16,7 +16,7 @@ import Swipe from '../src/swipe';
 import SwipeItem from '../src/swipe-item';
 import Frame from '../src/requestAnimationFrame';
 
-// console.log(Tag);
+console.log(Tag);
 // console.log(Swipe);
 export default {
   components: {
@@ -32,5 +32,6 @@ export default {
 .demo {
   
     height: 150px;
+    background: #f4f5f5;
 }
 </style>
