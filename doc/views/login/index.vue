@@ -16,8 +16,6 @@ export default {};
 }
 .input-fill-x, .input-outline-x, .textarea-outline-x {
     /* fit-content见文章：https://www.zhangxinxu.com/wordpress/?p=5392 */
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
     width: fit-content;
     position: relative;
 }
