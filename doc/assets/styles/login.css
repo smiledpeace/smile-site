@@ -35,7 +35,7 @@
  .input-fill-x:after {
      content: ' ';
      position: absolute;
-     border-bottom: 2px solid #999;
+     border-bottom: 2px solid #ae3ec9;
      bottom: -1px;
      left: 0;
      right: 0;
@@ -49,7 +49,7 @@
 
  .input-fill {
      padding: 20px 16px 6px;
-     background: #f4f5f6;
+     background: #f3d9fa;
      border: 1px solid transparent;
      width: calc(100% - 32px);
  }
@@ -58,19 +58,19 @@
      position: absolute;
      left: 16px;
      top: 14px;
-     color: #b3b4b5;
+     color: #282828;
      transition: all .3s ease;
  }
 
  .input-fill:not(:placeholder-shown)+.input-label,
  .input-fill:focus+.input-label {
      transform: scale(0.75) translate(-4px, -18px);
-     color: #999;
+     color: #282828;
  }
 
  .login-btn {
      width: 100%;
-     background-color: #f4f5f6;
+     background-color: #f3d9fa;
      border: 1px solid transparent;
      color: #282828;
  }
