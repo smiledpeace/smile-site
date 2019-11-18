@@ -7,6 +7,7 @@ const Login = () => import(/* webpackChunkName: "login" */ '../views/login/index
 const Chat = () => import(/* webpackChunkName: "login" */ '../views/chat/App.vue');
 const ChatLogin = () => import(/* webpackChunkName: "login" */ '../views/chat/views/Login.vue');
 const ChatDashboard = () => import(/* webpackChunkName: "login" */ '../views/chat/views/ChatDashboard.vue');
+const Element = () => import(/* webpackChunkName: "login" */ '../views/element/index.vue');
 // console.log(List);
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
                 component: ChatDashboard,
               }
         ]
+    },
+    {
+        path: "/element",
+        component: Element,
     },
     
 ];
