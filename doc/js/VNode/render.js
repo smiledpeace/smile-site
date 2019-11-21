@@ -42,7 +42,7 @@ function mount(vnode, container, isSVG) {
         mountPortal(vnode, container, isSVG)
     }
 }
-
+const domPropsRE = /\[A-Z]|^(?:value|checked|selected|muted)$/
 function mountElement(vnode, container, isSVG) {
     isSVG = isSVG || vnode.flags & VNodeFlags.ELEMENT_SVG
     const el = isSVG
@@ -66,6 +66,13 @@ function mountElement(vnode, container, isSVG) {
 
                     break
                 default:
+                    if (domPropsRE.test(key)) {
+                        // 当作 DOM Prop 处理
+                        el[key] = data[key]
+                    } else {
+                        // 当作 Attr 处理
+                        el.setAttribute(key, data[key])
+                    }
                     break
             }
         }
