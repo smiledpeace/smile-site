@@ -83,7 +83,7 @@ function normalizeVNodes(children) {
     return newChildren
 }
 
-function createTextVNode(text) {
+export function createTextVNode(text) {
     return {
         _isVNode: true,
         // flags 是 VNodeFlags.TEXT
