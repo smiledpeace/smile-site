@@ -3,6 +3,7 @@ import { types } from './util';
 import { createTextVNode } from './h';
 import { patchData } from './patchData';
 
+// vnode.el = el 主要引用真实的dom元素
 export default function render(vnode, container) {
     const prevVNode = container.vnode
     if (prevVNode == null) {
@@ -137,18 +138,43 @@ function mountStatefulComponent(vnode, container, isSVG) {
     // console.log(vnode);
 
     // 创建组件实例
-    const instance = new vnode.tag()
-    // 渲染VNode
-    instance.$vnode = instance.render()
-    // 挂载
-    mount(instance.$vnode, container, isSVG)
-    // el 属性值 和 组件实例的 $el 属性都引用组件的根DOM元素
-    instance.$el = vnode.el = instance.$vnode.el
+    const instance = (vnode.children = new vnode.tag())
+    // 初始化 props
+    instance.$props = vnode.data;
+    console.log(vnode);
+
+    instance._update = function () {
+        // 如果 instance._mounted 为真，说明组件已挂载，应该执行更新操作
+        if (instance._mounted) {
+            // 1、拿到旧的 VNode
+            const prevVNode = instance.$vnode
+            // 2、重渲染新的 VNode
+            const nextVNode = (instance.$vnode = instance.render())
+            // 3、patch 更新
+            patch(prevVNode, nextVNode, prevVNode.el.parentNode)
+            // 4、更新 vnode.el 和 $el
+            instance.$el = vnode.el = instance.$vnode.el
+        } else {
+            // 1、渲染VNode
+            instance.$vnode = instance.render()
+            // 2、挂载
+            mount(instance.$vnode, container, isSVG)
+            // 3、组件已挂载的标识
+            instance._mounted = true
+            // 4、el 属性值 和 组件实例的 $el 属性都引用组件的根DOM元素
+            instance.$el = vnode.el = instance.$vnode.el
+            // 5、调用 mounted 钩子
+            instance.mounted && instance.mounted()
+        }
+    }
+
+    instance._update()
 }
 // 无状态组件
 function mountFunctionalComponent(vnode, container, isSVG) {
+    const props = vnode.data
     // 获取 VNode
-    const $vnode = vnode.tag()
+    const $vnode = (vnode.children = vnode.tag(props))
     // 挂载
     mount($vnode, container, isSVG)
     // el 元素引用该组件的根元素
@@ -179,7 +205,13 @@ function patch(prevVNode, nextVNode, container) {
 // 看上去很简单，但实际上仅有这两行代码的话，是存在缺陷的。至于有何缺陷我们会在本章的后面讲解，因为目前我们的背景铺垫还不够
 function replaceVNode(prevVNode, nextVNode, container) {
     // 将旧的 VNode 所渲染的 DOM 从容器中移除
-    container.removeChild(prevVNode.el)
+    container.removeChild(prevVNode.el);
+
+    if (prevVNode.flags & VNodeFlags.COMPONENT_STATEFUL_NORMAL) {
+        // 类型为有状态组件的 VNode，其 children 属性被用来存储组件实例对象
+        const instance = prevVNode.children
+        instance.unmounted && instance.unmounted()
+    }
     // 再把新的 VNode 挂载到容器中
     mount(nextVNode, container)
 }
@@ -381,5 +413,19 @@ function patchPortal(prevVNode, nextVNode) {
                 }
                 break
         }
+    }
+}
+// 组件更新
+function patchComponent(prevVNode, nextVNode, container) {
+    // tag 属性的值是组件类，通过比较新旧组件类是否相等来判断是否是相同的组件
+    if (nextVNode.tag !== prevVNode.tag) {
+        replaceVNode(prevVNode, nextVNode, container)
+    } else if (nextVNode.flags & VNodeFlags.COMPONENT_STATEFUL_NORMAL) {
+        // 获取组件实例
+        const instance = (nextVNode.children = prevVNode.children)
+        // 更新 props
+        instance.$props = nextVNode.data
+        // 更新组件
+        instance._update()
     }
 }

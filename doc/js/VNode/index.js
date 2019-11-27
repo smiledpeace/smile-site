@@ -83,21 +83,83 @@ render(funNode, document.getElementById('app')) */
 // patch 更新
 
 // 旧的 VNode
-const prevVNode = h(Fragment, null, [
-    h('p', null, '旧片段子节点 1'),
-    h('p', null, '旧片段子节点 2')
-  ])
-  
-  // 新的 VNode
-  const nextVNode = h(Fragment, null, [
-    h('p', null, '新片段子节点 1'),
-    h('p', null, '新片段子节点 2')
-  ])
-  
-  render(prevVNode, document.getElementById('app'))
-  
-  // 2秒后更新
-  setTimeout(() => {
-    // render(nextVNode, document.getElementById('app'))
-  }, 2000)
+// const prevVNode = h(Fragment, null, [
+//     h('p', null, '旧片段子节点 1'),
+//     h('p', null, '旧片段子节点 2')
+//   ])
 
+//   // 新的 VNode
+//   const nextVNode = h(Fragment, null, [
+//     h('p', null, '新片段子节点 1'),
+//     h('p', null, '新片段子节点 2')
+//   ])
+
+//   render(prevVNode, document.getElementById('app'))
+
+//   // 2秒后更新
+//   setTimeout(() => {
+//     // render(nextVNode, document.getElementById('app'))
+//   }, 2000)
+
+// 有状态组件主动更新
+
+// class MyComponent {
+//     constructor() {
+//         this.localState = 'hello';
+//     }
+
+//     mounted() {
+//         // 两秒钟之后修改本地状态的值，并重新调用 _update() 函数更新组件
+//         setTimeout(() => {
+//             this.localState = 'two'
+//             this._update()
+//         }, 2000)
+//     }
+
+//     render() {
+//         return h('div', null, this.localState)
+//     }
+// }
+
+// const compNode = h(MyComponent);
+// console.log(compNode);
+
+
+// render(compNode, document.getElementById('app'))
+
+// 被动更新
+
+
+// 子组件类
+class ChildComponent {
+    render() {
+        console.log(this);
+
+        // 子组件中访问外部状态：this.$props.text
+        return h('div', null, this.$props.text)
+    }
+}
+// 父组件类
+class ParentComponent {
+    constructor() {
+        this.localState = 'one'
+    }
+
+    mounted() {
+        // 两秒钟后将 localState 的值修改为 'two'
+        setTimeout(() => {
+            this.localState = 'two'
+            this._update()
+        }, 2000)
+    }
+    render() {
+        return h(ChildComponent, {
+            // 父组件向子组件传递的 props
+            text: this.localState
+        })
+    }
+}
+
+// 有状态组件 VNode
+const compVNode = h(ParentComponent)
+render(compVNode, document.getElementById('app'))
