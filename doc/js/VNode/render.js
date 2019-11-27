@@ -46,7 +46,6 @@ function mount(vnode, container, isSVG) {
         mountPortal(vnode, container, isSVG)
     }
 }
-const domPropsRE = /\[A-Z]|^(?:value|checked|selected|muted)$/
 function mountElement(vnode, container, isSVG) {
     isSVG = isSVG || vnode.flags & VNodeFlags.ELEMENT_SVG
     const el = isSVG
