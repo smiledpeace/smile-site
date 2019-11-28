@@ -9,7 +9,8 @@
 //     render: h => h(App),
 // });
 
-// import './js/VNode/index';
-import './js/diyNode/index';
+import './js/VNode/index';
+import './js/Observe/observe';
+// import './js/diyNode/index';
 
 

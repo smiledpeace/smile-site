@@ -162,4 +162,27 @@ class ParentComponent {
 
 // 有状态组件 VNode
 const compVNode = h(ParentComponent)
-render(compVNode, document.getElementById('app'))
+// render(compVNode, document.getElementById('app'))
+
+const prevVNodeUl = h('ul', null, [
+    h('li', {key: 'a'}, '1'), 
+    h('li', {key: 'b'}, '2'), 
+    h('li', {key: 'c'}, '3'), 
+    h('li', {key: 'd'}, '4'), 
+    h('li', {key: 'e'}, '5')
+]);
+
+const nextVNodeUl = h('ul', null, [
+    h('li', {key: 'a'}, '1'), 
+    h('li', {key: 'e'}, 'e'), 
+    h('li', {key: 'd'}, 'd'),
+    h('li', {key: 'c'}, 'c'),
+    h('li', {key: 'b'}, 'b')
+]);
+render(prevVNodeUl, document.getElementById('app'));
+
+// console.log(nextVNodeUl);
+
+render(nextVNodeUl, document.getElementById('app'));
+
+
